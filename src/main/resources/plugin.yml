@@ -1,0 +1,7 @@
+name: LambdaAntiCheat
+version: @version@
+main: pl.lambdathedev.lac.LambdaAntiCheat
+api-version: 1.16
+authors: [LambdaTheDev]
+description: Anti cheat plugin by LambdaTheDev
+website: https://github.com/LambdaTheDev/LambdaAntiCheat
