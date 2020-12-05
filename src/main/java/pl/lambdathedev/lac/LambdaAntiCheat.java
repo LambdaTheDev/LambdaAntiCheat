@@ -11,13 +11,10 @@ public final class LambdaAntiCheat extends JavaPlugin
     public static LambdaAntiCheat LAC;
     public static boolean isExperimental = false;
 
-    private HashMap<Player, HashMap<Check, Integer>> violations;
-
     @Override
     public void onEnable()
     {
         LAC = this;
-        violations = new HashMap<>();
     }
 
     @Override
