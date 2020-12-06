@@ -7,5 +7,13 @@ public class PunishmentUtil
 {
     public static void punish(Check check, PlayerData data)
     {
+        if(check.isBannable())
+        {
+            data.getPlayer().kickPlayer("BANNED");
+        }
+        else
+        {
+            data.getPlayer().kickPlayer("KICKED");
+        }
     }
 }

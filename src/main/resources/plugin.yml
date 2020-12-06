@@ -1,5 +1,5 @@
 name: LambdaAntiCheat
-version: @version@
+version: 1.0
 main: pl.lambdathedev.lambdaanticheat.LambdaAntiCheat
 api-version: 1.16
 authors: [ LambdaTheDev ]

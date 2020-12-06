@@ -1,35 +1,62 @@
 package pl.lambdathedev.lambdaanticheat.checks;
 
-import io.github.retrooper.packetevents.event.PacketListenerDynamic;
-import io.github.retrooper.packetevents.event.priority.PacketEventPriority;
-import org.bukkit.Color;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import pl.lambdathedev.lambdaanticheat.LambdaAntiCheat;
 import pl.lambdathedev.lambdaanticheat.data.PlayerData;
 import pl.lambdathedev.lambdaanticheat.utils.MessageUtil;
 
-public abstract class Check extends PacketListenerDynamic implements Listener
+public abstract class Check
 {
-    private String name;
-    private int maxViolations;
-    private boolean isBannable;
-    private boolean isExperimental;
+    private final String name;
+    private final CheckType type;
+    private final int maxViolations;
+    private final boolean isBannable;
+    private final boolean isExperimental;
 
-    public Check(String name, int maxViolations, boolean isBannable, boolean isExperimental)
+    public Check(String name, CheckType type, int maxViolations, boolean isBannable, boolean isExperimental)
     {
-        super(PacketEventPriority.HIGHEST);
+        this.name = name;
+        this.type = type;
+        this.maxViolations = maxViolations;
+        this.isBannable = isBannable;
+        this.isExperimental = isExperimental;
     }
 
     public void report(Player p)
     {
-        report(p, "No additional info provided.");
+        report(p, "No additional info provided");
     }
 
     public void report(Player p, String content)
     {
-        PlayerData data = LambdaAntiCheat.instance.playerData.get(p.getUniqueId());
+        PlayerData data = LambdaAntiCheat.getInstance().getPlayerData().get(p.getUniqueId());
+        data.violate(this);
+        String message = "LAC VIOLATION >> " + p.getName() + " failed: " + getName() + " (" + data.getViolations(this) + "/" + getMaxViolations() + ")! Additional information: " + content;
+        MessageUtil.notifyStaff(message);
+    }
 
-        //Send message to the console and online staff members
+    public String getName()
+    {
+        return name;
+    }
+
+    public CheckType getType()
+    {
+        return type;
+    }
+
+    public int getMaxViolations()
+    {
+        return maxViolations;
+    }
+
+    public boolean isBannable()
+    {
+        return isBannable;
+    }
+
+    public boolean isExperimental()
+    {
+        return isExperimental;
     }
 }

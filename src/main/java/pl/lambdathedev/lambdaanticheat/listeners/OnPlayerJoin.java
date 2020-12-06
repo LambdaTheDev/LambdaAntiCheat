@@ -13,7 +13,7 @@ public class OnPlayerJoin implements Listener
     public void onPlayerJoin(PlayerJoinEvent e)
     {
         PlayerData data = new PlayerData(e.getPlayer());
-        LambdaAntiCheat.instance.playerData.put(e.getPlayer().getUniqueId(), data);
+        LambdaAntiCheat.getInstance().getPlayerData().put(e.getPlayer().getUniqueId(), data);
         MessageUtil.notifyConsole("Player " + e.getPlayer().getName() + " (" + e.getPlayer().getUniqueId() + ") has joined the server and has been loaded by LAC.");
     }
 }

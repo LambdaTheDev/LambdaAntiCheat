@@ -8,17 +8,37 @@ import java.util.HashMap;
 
 public class PlayerData
 {
-    private Player player;
-    private HashMap<Check, Integer> violations;
+    private final Player player;
+    private final HashMap<Check, Integer> violations;
 
     public PlayerData(Player p)
     {
-        player = p;
+        this.player = p;
         violations = new HashMap<>();
     }
 
     public Player getPlayer()
     {
         return player;
+    }
+
+    public void violate(Check check)
+    {
+        violations.put(check, violations.getOrDefault(check, 0) + 1);
+
+        if(violations.get(check) > check.getMaxViolations())
+        {
+            PunishmentUtil.punish(check, this);
+        }
+    }
+
+    public int getViolations(Check check)
+    {
+        return violations.getOrDefault(check, 0);
+    }
+
+    public void clearViolations()
+    {
+        violations.clear();
     }
 }

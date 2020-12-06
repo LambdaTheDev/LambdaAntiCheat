@@ -11,7 +11,7 @@ public class OnPlayerQuit implements Listener
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e)
     {
-        LambdaAntiCheat.instance.playerData.remove(e.getPlayer().getUniqueId());
+        LambdaAntiCheat.getInstance().getPlayerData().remove(e.getPlayer().getUniqueId());
         MessageUtil.notifyConsole("Player " + e.getPlayer().getName() + "(" + e.getPlayer().getUniqueId() + ") has left the server and has been unloaded from LAC.");
     }
 }

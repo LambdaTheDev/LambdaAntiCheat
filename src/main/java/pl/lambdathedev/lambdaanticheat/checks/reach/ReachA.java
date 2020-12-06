@@ -5,9 +5,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import pl.lambdathedev.lambdaanticheat.checks.BukkitCheck;
 import pl.lambdathedev.lambdaanticheat.checks.Check;
 
-public class ReachA extends Check
+public class ReachA extends BukkitCheck
 {
     public ReachA(String name, int maxViolations, boolean isBannable, boolean isExperimental)
     {
@@ -25,11 +26,11 @@ public class ReachA extends Check
             playerLocation.setY(0);
             damagedLocation.setY(0);
 
-            double distance = playerLocation.distanceSquared(damagedLocation);
-            double maxDistance = 3f;
+            final double distance = playerLocation.distanceSquared(damagedLocation);
+            double maxDistance = 3.3f;
             if(((Player) e.getDamager()).getGameMode() == GameMode.CREATIVE) maxDistance = 6f;
 
-            if(distance > (maxDistance + 0.2) * (maxDistance + 0.2f))
+            if(distance > maxDistance * maxDistance)
             {
                 report((Player) e.getDamager(), "distance=" + Math.sqrt(distance));
             }
