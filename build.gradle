@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
-    implementation 'com.github.retrooper:packetevents:Tag'
+    implementation 'com.github.retrooper:packetevents:1.7.9'
 }
 
 processResources {
