@@ -3,6 +3,7 @@ package pl.lambdathedev.lambdaanticheat.checks;
 import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.Bukkit;
 import pl.lambdathedev.lambdaanticheat.LambdaAntiCheat;
+import pl.lambdathedev.lambdaanticheat.checks.invalidpitch.InvalidPitchA;
 import pl.lambdathedev.lambdaanticheat.checks.reach.ReachA;
 import pl.lambdathedev.lambdaanticheat.checks.reach.ReachB;
 import pl.lambdathedev.lambdaanticheat.packets.PacketsListener;
@@ -27,8 +28,9 @@ public class ChecksManager
     {
         checks.addAll(Arrays.asList(
                 new ReachA("Reach A", 7, false, false),
-                new ReachB("Reach B", 7, false, false)
+                new ReachB("Reach B", 7, false, false),
 
+                new InvalidPitchA("Invalid pitch A", 5, false, false)
                 //And next checks....
         ));
 

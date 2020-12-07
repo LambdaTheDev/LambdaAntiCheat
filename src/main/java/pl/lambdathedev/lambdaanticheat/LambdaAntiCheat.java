@@ -43,6 +43,7 @@ public final class LambdaAntiCheat extends JavaPlugin
         PacketEvents.getAPI().getEventManager().registerListener(new PacketsListener());
         PacketEvents.init(this);
 
+        loadConfig();
         registerListeners();
         scheduleViolationsReset();
 
@@ -77,6 +78,11 @@ public final class LambdaAntiCheat extends JavaPlugin
             }
             MessageUtil.notifyStaff("LAC >> Cleared violations!");
         }, delay, delay);
+    }
+
+    private void loadConfig()
+    {
+
     }
 
     public static LambdaAntiCheat getInstance()
