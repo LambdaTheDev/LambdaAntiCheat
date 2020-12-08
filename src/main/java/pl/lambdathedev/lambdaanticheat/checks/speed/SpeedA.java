@@ -9,7 +9,7 @@ import pl.lambdathedev.lambdaanticheat.checks.BukkitCheck;
 public class SpeedA extends BukkitCheck
 {
     private double lastDistance;
-    private boolean lastOnGround;
+    private boolean lastGrounded;
 
     public SpeedA(String name, int maxViolations, boolean isBannable, boolean isExperimental)
     {
@@ -28,7 +28,22 @@ public class SpeedA extends BukkitCheck
 
         LivingEntity entity = e.getPlayer();
         boolean isGrounded = entity.isOnGround();
+        boolean lastGrounded = this.lastGrounded;
+        this.lastGrounded = lastGrounded;
 
         float friction = 0.91f;
+        double shiftedLastDistance = lastDistance * friction;
+        double counter = distance - shiftedLastDistance;
+        double scaledCounter = counter * 139;
+
+        e.getPlayer().sendMessage("SPEED: " + counter + "\nSCALED: " + scaledCounter);
+
+        if(!isGrounded && !this.lastGrounded)
+        {
+            if(scaledCounter >= 1f)
+            {
+//                report(e.getPlayer(), "speed=" + counter);
+            }
+        }
     }
 }
