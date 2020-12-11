@@ -7,14 +7,16 @@ import pl.lambdathedev.lambdaanticheat.utils.MessageUtil;
 
 public abstract class Check
 {
+    private final PlayerData playerData;
     private final String name;
     private final CheckType type;
     private final int maxViolations;
     private final boolean isBannable;
     private final boolean isExperimental;
 
-    public Check(String name, CheckType type, int maxViolations, boolean isBannable, boolean isExperimental)
+    public Check(PlayerData data, String name, CheckType type, int maxViolations, boolean isBannable, boolean isExperimental)
     {
+        this.playerData = data;
         this.name = name;
         this.type = type;
         this.maxViolations = maxViolations;
@@ -22,17 +24,18 @@ public abstract class Check
         this.isExperimental = isExperimental;
     }
 
-    public void report(Player p)
+    public void report()
     {
-        report(p, "No additional info provided");
+        report("none");
     }
 
-    public void report(Player p, String content)
+    public void report(String content)
     {
-        PlayerData data = LambdaAntiCheat.getInstance().getPlayerData().get(p.getUniqueId());
-        data.violate(this);
-        String message = "LAC VIOLATION >> " + p.getName() + " failed: " + getName() + " (" + data.getViolations(this) + "/" + getMaxViolations() + ")! Additional information: " + content;
-        MessageUtil.notifyStaff(message);
+    }
+
+    public PlayerData getPlayerData()
+    {
+        return playerData;
     }
 
     public String getName()

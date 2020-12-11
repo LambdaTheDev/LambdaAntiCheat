@@ -1,44 +1,19 @@
 package pl.lambdathedev.lambdaanticheat.data;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import pl.lambdathedev.lambdaanticheat.checks.Check;
-import pl.lambdathedev.lambdaanticheat.utils.PunishmentUtil;
 
 import java.util.HashMap;
 
 public class PlayerData
 {
-    private final Player player;
-    private final HashMap<Check, Integer> violations;
+    private Player player;
 
-    public PlayerData(Player p)
-    {
-        this.player = p;
-        violations = new HashMap<>();
-    }
-
-    public Player getPlayer()
-    {
-        return player;
-    }
-
-    public void violate(Check check)
-    {
-        violations.put(check, violations.getOrDefault(check, 0) + 1);
-
-        if(violations.get(check) > check.getMaxViolations())
-        {
-            PunishmentUtil.punish(check, this);
-        }
-    }
-
-    public int getViolations(Check check)
-    {
-        return violations.getOrDefault(check, 0);
-    }
-
-    public void clearViolations()
-    {
-        violations.clear();
-    }
+    //SyncVars
+    private final SyncVar<Float> cps = new SyncVar<>(0f);
+    private final SyncVar<Integer> ticks = new SyncVar<>(0);
+    private final SyncVar<Entity> currentTarget = new SyncVar<>(null);
+    private final SyncVar<Long> ping = new SyncVar<>(0L);
+    private final SyncVar<Long> transactionPing = new SyncVar<>(0L);
 }

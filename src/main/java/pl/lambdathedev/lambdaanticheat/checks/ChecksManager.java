@@ -1,17 +1,13 @@
 package pl.lambdathedev.lambdaanticheat.checks;
 
-import io.github.retrooper.packetevents.PacketEvents;
 import org.bukkit.Bukkit;
 import pl.lambdathedev.lambdaanticheat.LambdaAntiCheat;
 import pl.lambdathedev.lambdaanticheat.checks.invalidpitch.InvalidPitchA;
-import pl.lambdathedev.lambdaanticheat.checks.reach.ReachA;
-import pl.lambdathedev.lambdaanticheat.checks.reach.ReachB;
 import pl.lambdathedev.lambdaanticheat.checks.speed.SpeedA;
 import pl.lambdathedev.lambdaanticheat.packets.PacketsListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class ChecksManager
