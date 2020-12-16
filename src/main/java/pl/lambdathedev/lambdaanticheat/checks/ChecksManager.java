@@ -8,6 +8,7 @@ import pl.lambdathedev.lambdaanticheat.packets.PacketsListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ChecksManager
@@ -23,14 +24,8 @@ public class ChecksManager
 
     public void loadChecks()
     {
-        checks.addAll(Arrays.asList(
-                new ReachA("Reach A", 7, false, false),
-                new ReachB("Reach B", 7, false, false),
-
-                new InvalidPitchA("Invalid pitch A", 5, false, false),
-                new SpeedA("Speed A", 5, false, false)
-                //And next checks....
-        ));
+        //And next checks....
+        checks.addAll(Collections.emptyList());
 
         registerChecks();
     }
@@ -51,6 +46,7 @@ public class ChecksManager
                     break;
                 case RECEIVED_PACKET:
                     PacketsListener.getInstance().registerPacketReceiveListener((ReceivedPacketsCheck)check);
+                    break;
             }
         }
     }

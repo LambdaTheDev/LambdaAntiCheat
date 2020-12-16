@@ -21,7 +21,6 @@ public final class LambdaAntiCheat extends JavaPlugin
     private static LambdaAntiCheat instance;
 
     private HashMap<UUID, PlayerData> playerData;
-    private ChecksManager checksManager;
 
     @Override
     public void onLoad()
@@ -33,7 +32,6 @@ public final class LambdaAntiCheat extends JavaPlugin
     public void onEnable()
     {
         playerData = new HashMap<>();
-        checksManager = new ChecksManager(this);
 
         PacketEvents.getSettings().backupServerVersion(ServerVersion.v_1_16_4);
         PacketEvents.getAPI().getEventManager().registerListener(new PacketsListener());
@@ -56,8 +54,6 @@ public final class LambdaAntiCheat extends JavaPlugin
         //Bukkit listeners
         getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new OnPlayerQuit(), this);
-
-        checksManager.loadChecks();
     }
 
     private void loadConfig()
