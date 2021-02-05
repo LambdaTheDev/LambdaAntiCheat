@@ -1,16 +1,16 @@
 package pl.lambdathedev.lambdaanticheat.data;
 
+import lombok.Getter;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import pl.lambdathedev.lambdaanticheat.checks.Check;
+import pl.lambdathedev.lambdaanticheat.check.ChecksManager;
 import pl.lambdathedev.lambdaanticheat.data.updates.PositionUpdate;
 import pl.lambdathedev.lambdaanticheat.data.updates.RotationUpdate;
 
-import java.util.HashMap;
-
+@Getter
 public class PlayerData
 {
-    private Player player;
+    private final Player player;
 
     //SyncVars
     private final SyncVar<Boolean> cinematic = new SyncVar<>(false);
@@ -25,4 +25,11 @@ public class PlayerData
 
     private final SyncVar<RotationUpdate> rotationUpdate = new SyncVar<>(new RotationUpdate(0, 0));
     private final SyncVar<PositionUpdate> positionUpdate = new SyncVar<>(new PositionUpdate(null, null, false));
+
+    public PlayerData(Player player)
+    {
+        this.player = player;
+
+        new ChecksManager(this);
+    }
 }

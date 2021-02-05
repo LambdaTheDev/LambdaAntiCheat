@@ -2,7 +2,7 @@ package pl.lambdathedev.lambdaanticheat.data.managers;
 
 import org.bukkit.Bukkit;
 import pl.lambdathedev.lambdaanticheat.LambdaAntiCheat;
-import pl.lambdathedev.lambdaanticheat.checks.Check;
+import pl.lambdathedev.lambdaanticheat.check.Check;
 import pl.lambdathedev.lambdaanticheat.data.PlayerData;
 
 import java.util.HashMap;

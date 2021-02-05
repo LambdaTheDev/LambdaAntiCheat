@@ -1,9 +1,14 @@
-package pl.lambdathedev.lambdaanticheat.checks;
+package pl.lambdathedev.lambdaanticheat.check;
 
 import org.bukkit.Bukkit;
 import pl.lambdathedev.lambdaanticheat.LambdaAntiCheat;
-import pl.lambdathedev.lambdaanticheat.checks.invalidpitch.InvalidPitchA;
-import pl.lambdathedev.lambdaanticheat.checks.speed.SpeedA;
+import pl.lambdathedev.lambdaanticheat.check.types.BukkitCheck;
+import pl.lambdathedev.lambdaanticheat.check.types.ReceivedPacketsCheck;
+import pl.lambdathedev.lambdaanticheat.check.types.SentPacketsCheck;
+import pl.lambdathedev.lambdaanticheat.checks.badpackets.BadPacketsA;
+import pl.lambdathedev.lambdaanticheat.checks.crits.CritsA;
+import pl.lambdathedev.lambdaanticheat.checks.invalidblockbreak.InvalidBlockBreakA;
+import pl.lambdathedev.lambdaanticheat.data.PlayerData;
 import pl.lambdathedev.lambdaanticheat.packets.PacketsListener;
 
 import java.util.ArrayList;
@@ -13,25 +18,35 @@ import java.util.List;
 
 public class ChecksManager
 {
-    private LambdaAntiCheat plugin;
-    private List<Check> checks;
+    private final PlayerData data;
+    private final List<Check> checks;
 
-    public ChecksManager(LambdaAntiCheat plugin)
+    public ChecksManager(PlayerData data)
     {
-        this.plugin = plugin;
+        this.data = data;
         checks = new ArrayList<>();
+
+        loadChecks();
     }
 
     public void loadChecks()
     {
         //And next checks....
-        checks.addAll(Collections.emptyList());
+        checks.addAll(Arrays.asList(
+                new BadPacketsA(data),
+
+                new CritsA(data),
+
+                new InvalidBlockBreakA(data)
+        ));
 
         registerChecks();
     }
 
     private void registerChecks()
     {
+        final LambdaAntiCheat instance = LambdaAntiCheat.getInstance();
+
         for(Check check : checks)
         {
             if(check.isExperimental() && !LambdaAntiCheat.IS_EXPERIMENTAL) continue;
@@ -39,7 +54,7 @@ public class ChecksManager
             switch (check.getType())
             {
                 case BUKKIT:
-                    Bukkit.getServer().getPluginManager().registerEvents((BukkitCheck)check, plugin);
+                    Bukkit.getServer().getPluginManager().registerEvents((BukkitCheck)check, instance);
                     break;
                 case SENT_PACKET:
                     PacketsListener.getInstance().registerPacketSendListener((SentPacketsCheck)check);

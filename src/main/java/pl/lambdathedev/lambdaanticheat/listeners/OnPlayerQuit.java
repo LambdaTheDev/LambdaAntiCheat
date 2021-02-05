@@ -4,7 +4,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import pl.lambdathedev.lambdaanticheat.LambdaAntiCheat;
-import pl.lambdathedev.lambdaanticheat.utils.MessageUtil;
 
 public class OnPlayerQuit implements Listener
 {
@@ -12,6 +11,6 @@ public class OnPlayerQuit implements Listener
     public void onPlayerQuit(PlayerQuitEvent e)
     {
         LambdaAntiCheat.getInstance().getPlayerData().remove(e.getPlayer().getUniqueId());
-        MessageUtil.notifyConsole("Player " + e.getPlayer().getName() + "(" + e.getPlayer().getUniqueId() + ") has left the server and has been unloaded from LAC.");
+        //MessageUtil.notifyConsole("Player " + e.getPlayer().getName() + "(" + e.getPlayer().getUniqueId() + ") has left the server and has been unloaded from LAC.");
     }
 }

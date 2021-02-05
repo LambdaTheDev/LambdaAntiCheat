@@ -1,4 +1,4 @@
-package pl.lambdathedev.lambdaanticheat.checks;
+package pl.lambdathedev.lambdaanticheat.check;
 
 public enum CheckType
 {
